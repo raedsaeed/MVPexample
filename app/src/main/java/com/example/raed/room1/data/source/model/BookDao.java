@@ -1,4 +1,4 @@
-package com.example.raed.room1.data.source.local;
+package com.example.raed.room1.data.source.model;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;

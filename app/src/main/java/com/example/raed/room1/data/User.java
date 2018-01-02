@@ -10,31 +10,44 @@ import android.support.annotation.NonNull;
  * Created by raed on 12/28/17.
  */
 
+/**
+ * Create table called users has and index is {uid, first_name and last_name}
+ * NOTE adding index to table will speed up your queries but will slow down other database
+ * operation such as insert or update.
+ */
+
 @Entity(tableName = "users", indices = {@Index(value = "uid"),
         @Index(value = {"first_name", "last_name"}, unique = true)})
 public class User {
 
+    // First Column in table called uid and will represented as uid INTEGER PRIMARY KEY AUTO INCREMENT
+    // You can specify any column name using annotation @ColumnInfo (name = "Some Text")
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "uid")
     private int userId;
 
+    // Second Column in table called first_name will represented as first_name TEXT NOT NULL
     @ColumnInfo(name = "first_name")
     @NonNull
     private String firstName;
 
+    // Third Column in table called last_name will represented as last_name TEXT NOT NULL
     @ColumnInfo(name = "last_name")
     @NonNull
     private String lastName;
 
+    // Forth Column in table call level will represented as level INTEGER
     @ColumnInfo(name = "level")
     private int level;
 
+    // Constructor of User class
     public User (String firstName, String lastName, int level) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.level = level;
     }
 
+    // Getters and Setters
     @NonNull
     public String getFirstName() {
         return firstName;
@@ -74,10 +87,17 @@ public class User {
         return firstName.hashCode() + lastName.hashCode();
     }
 
+    /**
+     * Overriding equals method to avoid duplicate objects if i want to insert it into a list
+     * @param obj that should be measured
+     * @return true if the object equals another object, false if the object not equals the parameter object
+     */
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) return true;
+
         if (!(obj instanceof User)) {
-            return true;
+            return false;
         }
         return ((User)obj).level == level &&
                 ((User)obj).firstName.equals(firstName) &&
