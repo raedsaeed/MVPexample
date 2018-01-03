@@ -1,6 +1,10 @@
 package com.example.raed.room1.data.source;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
+
 import com.example.raed.room1.data.User;
+import com.example.raed.room1.data.source.model.AppDatabase;
 
 import java.util.List;
 
@@ -9,6 +13,12 @@ import java.util.List;
  */
 
 public class DataRepository implements DataSource.UserOperation{
+
+    private AppDatabase database;
+
+    public DataRepository (Context context) {
+        database = AppDatabase.getInstance(context);
+    }
 
     @Override
     public User getUserById(int id) {

@@ -26,16 +26,17 @@ public abstract class AppDatabase extends RoomDatabase{
 
     // Abstract instance of UserDao and used to allow abstract the database communications
     public abstract UserDao userDao ();
+    public abstract BookDao bookDao ();
 
     // Static instance of AppDatabase
-    private static AppDatabase instance;
+    private static volatile AppDatabase instance;
 
     /**
      * static method that create the {@link AppDatabase} instance
      * @param context that is used to build the RoomDatabase
      * @return an instance of the AppDatabase
      */
-    public static AppDatabase getInstance (Context context) {
+    public static synchronized AppDatabase getInstance (Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context,
                     AppDatabase.class,

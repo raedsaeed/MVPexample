@@ -3,6 +3,8 @@ package com.example.raed.room1;
 import android.content.Context;
 
 import com.example.raed.room1.data.User;
+import com.example.raed.room1.data.source.DataRepository;
+import com.example.raed.room1.data.source.DataSource;
 import com.example.raed.room1.data.source.model.AppDatabase;
 
 import java.util.List;
@@ -21,18 +23,16 @@ import java.util.List;
 public class ActivityPresenter implements AppContract.Presenter {
     private static final String TAG = "ActivityPresenter";
 
-    // An instance from AppDatabase
-    private AppDatabase database;
-
     // AppContract.View interface instance
     private AppContract.View viewData;
 
+    private DataRepository dataRepository;
     // Constructor of ActivityPresenter
     public ActivityPresenter (Context context) {
-        // Initialize database instance
-        database = AppDatabase.getInstance(context);
         // Initialize viewData interface by casting it fromm the context
         viewData = (AppContract.View) context;
+
+        dataRepository = new DataRepository(context);
     }
 
     /**
@@ -42,9 +42,6 @@ public class ActivityPresenter implements AppContract.Presenter {
      */
     @Override
     public long saveUser(User user) {
-        if (user != null) {
-            return database.userDao().addUser(user);
-        }
         return 0;
     }
 
@@ -54,7 +51,6 @@ public class ActivityPresenter implements AppContract.Presenter {
      */
     @Override
     public void deleteUser(int userId) {
-        database.userDao().deleteUserById(userId);
     }
 
     /**
@@ -63,7 +59,7 @@ public class ActivityPresenter implements AppContract.Presenter {
      */
     @Override
     public List<User> getAllUsers() {
-       viewData.showUsers(database.userDao().getAll());
+
        return null;
     }
 }

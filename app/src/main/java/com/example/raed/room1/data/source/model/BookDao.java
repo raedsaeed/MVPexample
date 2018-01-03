@@ -19,8 +19,8 @@ public interface BookDao {
     @Query("SELECT * FROM books")
     List<Book> getAllBooks ();
 
-    @Query("SELECT * FROM books WHERE book_id = :bookId")
-    Book getBookById (int bookId);
+    @Query("SELECT * FROM books WHERE user_id = :userId")
+    List<Book> getBookById (int userId);
 
     @Query("SELECT * FROM books WHERE book_name LIKE :name")
     List<Book> getBooksByName (String name);
