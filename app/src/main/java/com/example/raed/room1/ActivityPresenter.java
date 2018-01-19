@@ -3,8 +3,7 @@ package com.example.raed.room1;
 import android.content.Context;
 
 import com.example.raed.room1.data.User;
-import com.example.raed.room1.data.source.DataRepository;
-import com.example.raed.room1.data.source.DataSource;
+import com.example.raed.room1.data.source.UserUtils;
 import com.example.raed.room1.data.source.model.AppDatabase;
 
 import java.util.List;
@@ -26,13 +25,17 @@ public class ActivityPresenter implements AppContract.Presenter {
     // AppContract.View interface instance
     private AppContract.View viewData;
 
-    private DataRepository dataRepository;
+    // Database instance
+    private AppDatabase database;
+
+    private Context context;
+
     // Constructor of ActivityPresenter
     public ActivityPresenter (Context context) {
         // Initialize viewData interface by casting it fromm the context
         viewData = (AppContract.View) context;
-
-        dataRepository = new DataRepository(context);
+        database = AppDatabase.getInstance(context);
+        this.context = context;
     }
 
     /**
@@ -42,7 +45,7 @@ public class ActivityPresenter implements AppContract.Presenter {
      */
     @Override
     public long saveUser(User user) {
-        return 0;
+        return UserUtils.insertUser(context, user);
     }
 
     /**
@@ -51,6 +54,7 @@ public class ActivityPresenter implements AppContract.Presenter {
      */
     @Override
     public void deleteUser(int userId) {
+        UserUtils.deleteUserById(context, userId);
     }
 
     /**
@@ -59,7 +63,6 @@ public class ActivityPresenter implements AppContract.Presenter {
      */
     @Override
     public List<User> getAllUsers() {
-
-       return null;
+       return UserUtils.getAllUsers(context);
     }
 }

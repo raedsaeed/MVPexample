@@ -21,7 +21,7 @@ import com.example.raed.room1.data.User;
  * {@link User} and {@link Book} are classes that annotated with @Entity and declared
  * as two tables within the Database
  */
-@Database(entities = {User.class, Book.class}, version = 2, exportSchema = false)
+@Database(entities = {User.class, Book.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase{
 
     // Abstract instance of UserDao and used to allow abstract the database communications

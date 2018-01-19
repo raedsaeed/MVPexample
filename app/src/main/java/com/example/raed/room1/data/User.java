@@ -4,7 +4,10 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+
+import java.net.URI;
 
 /**
  * Created by raed on 12/28/17.
@@ -41,7 +44,7 @@ public class User {
     private int level;
 
     // Constructor of User class
-    public User (String firstName, String lastName, int level) {
+    public User (@NonNull String firstName, @NonNull String lastName, int level) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.level = level;

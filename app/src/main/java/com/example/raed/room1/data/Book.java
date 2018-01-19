@@ -15,7 +15,7 @@ import android.arch.persistence.room.PrimaryKey;
                 parentColumns = "uid",
                 childColumns = "user_id",
                 onDelete = ForeignKey.CASCADE,
-                onUpdate = ForeignKey.CASCADE), indices = { @Index(value = "book_id")})
+                onUpdate = ForeignKey.CASCADE), indices = { @Index(value = {"book_id", "user_id"})})
 public class Book {
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo (name = "book_id")
