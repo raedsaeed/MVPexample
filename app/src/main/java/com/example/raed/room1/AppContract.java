@@ -22,6 +22,7 @@ public interface AppContract {
      */
 
     interface View {
+        // Add some command
         void showUsers(List<User> users);
 
         void setTitle (String name);
