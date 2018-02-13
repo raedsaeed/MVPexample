@@ -18,6 +18,7 @@ public class ContextModule {
     }
 
     @Provides
+    @RoomScope
     public Context getContext () {
         return context;
     }

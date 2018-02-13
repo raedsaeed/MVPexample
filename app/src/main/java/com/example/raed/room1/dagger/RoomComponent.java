@@ -8,6 +8,7 @@ import dagger.Component;
  * Created by raed on 2/13/18.
  */
 
+@RoomScope
 @Component (modules = {PresenterModule.class})
 public interface RoomComponent {
     ActivityPresenter getPresenter();

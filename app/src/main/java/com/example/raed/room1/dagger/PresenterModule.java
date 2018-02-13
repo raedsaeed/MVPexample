@@ -15,6 +15,7 @@ import dagger.Provides;
 public class PresenterModule {
 
     @Provides
+    @RoomScope
     public ActivityPresenter myPresenter (Context context) {
         return new ActivityPresenter(context);
     }
