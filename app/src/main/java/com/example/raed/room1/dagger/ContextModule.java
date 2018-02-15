@@ -2,6 +2,8 @@ package com.example.raed.room1.dagger;
 
 import android.content.Context;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -19,6 +21,7 @@ public class ContextModule {
 
     @Provides
     @RoomScope
+    @ContextQualifier
     public Context getContext () {
         return context;
     }

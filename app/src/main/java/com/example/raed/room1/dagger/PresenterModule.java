@@ -16,7 +16,7 @@ public class PresenterModule {
 
     @Provides
     @RoomScope
-    public ActivityPresenter myPresenter (Context context) {
+    public ActivityPresenter myPresenter (@ContextQualifier Context context) {
         return new ActivityPresenter(context);
     }
 }
