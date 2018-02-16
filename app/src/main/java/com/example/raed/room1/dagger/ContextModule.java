@@ -1,8 +1,7 @@
 package com.example.raed.room1.dagger;
 
-import android.content.Context;
 
-import javax.inject.Named;
+import com.example.raed.room1.ActivityView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -13,16 +12,16 @@ import dagger.Provides;
 
 @Module
 public class ContextModule {
-    private Context context;
+    private ActivityView view;
 
-    public ContextModule (Context context) {
-        this.context = context;
+    public ContextModule(ActivityView view) {
+        this.view = view;
     }
 
     @Provides
     @RoomScope
     @ContextQualifier
-    public Context getContext () {
-        return context;
+    public ActivityView getActivityView() {
+        return view;
     }
 }

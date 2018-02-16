@@ -6,9 +6,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.raed.room1.dagger.ContextModule;
+import com.example.raed.room1.dagger.DaggerRoomComponent;
+import com.example.raed.room1.dagger.RoomComponent;
 import com.example.raed.room1.data.User;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Represent the View of The MVP architecture pattern and implements {@link AppContract.View}
@@ -19,6 +24,7 @@ public class ActivityView extends AppCompatActivity implements AppContract.View,
 
     private static final String TAG = "ActivityView";
     //Declare a member Variable ActivityPresenter
+    @Inject
     ActivityPresenter presenter;
     //A button to get data from database
     Button button;
@@ -29,7 +35,11 @@ public class ActivityView extends AppCompatActivity implements AppContract.View,
         setContentView(R.layout.activity_main);
 
         // Initialize the presenter
-        presenter = new ActivityPresenter(this);
+        RoomComponent component =  DaggerRoomComponent.builder()
+                .contextModule(new ContextModule(this))
+                .build();
+
+        component.inject(this);
 
         // Initialize the button
         button = (Button)findViewById(R.id.show_data);
@@ -40,13 +50,9 @@ public class ActivityView extends AppCompatActivity implements AppContract.View,
         addSomeUsers("Mahmoud", "Saeed", 1);
         addSomeUsers("Nasser", "Saeed", 1);
     }
-
-    /**
-     * showUser method called by presenter if there is a data in the database
-     * @param userList to display as a log message
-     */
     @Override
     public void showUsers(List<User> userList) {
+        Log.d(TAG, "showUsers: " + userList.size());
         StringBuilder builder = new StringBuilder();
         for (User user : userList) {
             builder.append(user.getFirstName() + " " + user.getLastName() + " level : " + user.getLevel() +'\n');
@@ -89,6 +95,7 @@ public class ActivityView extends AppCompatActivity implements AppContract.View,
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.show_data) {
+            Log.d(TAG, "onClick: Clicked");
             // Declare a thread to get the users from the database
             Thread thread = new Thread(new Runnable() {
                 @Override

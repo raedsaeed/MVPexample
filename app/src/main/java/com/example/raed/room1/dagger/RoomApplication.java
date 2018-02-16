@@ -18,14 +18,6 @@ public class RoomApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        RoomComponent component =  DaggerRoomComponent.builder()
-                .contextModule(new ContextModule(this))
-                .build();
 
-        presenter = component.getPresenter();
-        presenter2 = component.getPresenter();
-
-        Log.i(TAG, "onCreate: presenter " + presenter);
-        Log.i(TAG, "onCreate: presenter2 " + presenter2);
     }
 }

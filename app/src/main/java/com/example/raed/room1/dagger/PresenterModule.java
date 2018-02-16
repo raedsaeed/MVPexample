@@ -1,8 +1,8 @@
 package com.example.raed.room1.dagger;
 
-import android.content.Context;
 
 import com.example.raed.room1.ActivityPresenter;
+import com.example.raed.room1.ActivityView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,7 +16,7 @@ public class PresenterModule {
 
     @Provides
     @RoomScope
-    public ActivityPresenter myPresenter (@ContextQualifier Context context) {
+    public ActivityPresenter myPresenter (@ContextQualifier ActivityView context) {
         return new ActivityPresenter(context);
     }
 }

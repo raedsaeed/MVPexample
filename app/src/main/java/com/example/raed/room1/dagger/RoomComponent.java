@@ -1,6 +1,7 @@
 package com.example.raed.room1.dagger;
 
 import com.example.raed.room1.ActivityPresenter;
+import com.example.raed.room1.ActivityView;
 
 import dagger.Component;
 
@@ -11,5 +12,5 @@ import dagger.Component;
 @RoomScope
 @Component (modules = {PresenterModule.class})
 public interface RoomComponent {
-    ActivityPresenter getPresenter();
+    void inject(ActivityView activityView);
 }

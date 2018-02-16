@@ -6,6 +6,9 @@ import javax.inject.Qualifier;
  * Created by raed on 2/15/18.
  */
 
+/**
+ * Qualifier used for distinguishing between different Modules
+ */
 @Qualifier
 public @interface ContextQualifier {
 }

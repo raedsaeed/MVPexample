@@ -1,12 +1,15 @@
 package com.example.raed.room1;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.raed.room1.data.User;
 import com.example.raed.room1.data.source.UserUtils;
 import com.example.raed.room1.data.source.model.AppDatabase;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 /**
@@ -31,7 +34,8 @@ public class ActivityPresenter implements AppContract.Presenter {
     private Context context;
 
     // Constructor of ActivityPresenter
-    public ActivityPresenter (Context context) {
+    @Inject
+    public ActivityPresenter (ActivityView context) {
         // Initialize viewData interface by casting it fromm the context
         viewData = (AppContract.View) context;
         database = AppDatabase.getInstance(context);
@@ -63,6 +67,8 @@ public class ActivityPresenter implements AppContract.Presenter {
      */
     @Override
     public List<User> getAllUsers() {
-       return UserUtils.getAllUsers(context);
+        Log.d(TAG, "getAllUsers: called");
+        viewData.showUsers(UserUtils.getAllUsers(context));
+        return null;
     }
 }
